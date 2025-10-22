@@ -16,8 +16,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          ref: main  # Replace with your default branch name
-          fetch-depth: 0
+          fetch-depth: 0  # Full history for commits
           persist-credentials: true
 
       - name: Install Power Platform Tools
@@ -59,9 +58,18 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
+
+          # Ensure we're on the correct branch
+          git checkout main
+
+          # Add and commit only if there are changes
           git add solutions/
-          git diff --cached --quiet || git commit -m "Unpacked solution ${{ github.event.inputs.solution-name }}"
-          git push origin HEAD:main
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Unpacked solution ${{ github.event.inputs.solution-name }}"
+            git push origin main
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
