@@ -1,0 +1,68 @@
+name: Export and Unpack Power Platform Solution
+
+on:
+  workflow_dispatch:
+    inputs:
+      solution-name:
+        description: 'Unique name of the solution to export'
+        required: true
+        default: 'your_solution_unique_name'  # Replace with actual unique name
+
+jobs:
+  export-unpack:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0  # Ensures full history for commits
+          persist-credentials: true
+
+      - name: Install Power Platform Tools
+        uses: microsoft/powerplatform-actions/actions-install@v1
+
+      - name: Export solution
+        uses: microsoft/powerplatform-actions/export-solution@v1
+        with:
+          environment-url: ${{ secrets.ENVIRONMENT_URL }}
+          app-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ secrets.TENANT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          solution-name: ${{ github.event.inputs.solution-name }}
+          solution-output-file: 'solution.zip'
+
+      - name: Confirm solution.zip exists
+        run: |
+          if (Test-Path "solution.zip") {
+            Write-Host "solution.zip found."
+          } else {
+            Write-Error "solution.zip not found!"
+            exit 1
+          }
+        shell: pwsh
+
+      - name: Unpack solution
+        uses: microsoft/powerplatform-actions/unpack-solution@v1
+        with:
+          solution-file: 'solution.zip'
+          solution-folder: 'solutions/${{ github.event.inputs.solution-name }}'
+
+      - name: List unpacked solution contents
+        run: |
+          Write-Host "Listing contents of solutions/${{ github.event.inputs.solution-name }}:"
+          Get-ChildItem -Recurse solutions/${{ github.event.inputs.solution-name }}
+        shell: pwsh
+
+      - name: Commit and push unpacked solution
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add solutions/
+          git diff --cached --quiet || git commit -m "Unpacked solution ${{ github.event.inputs.solution-name }}"
+          git push origin ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+``
