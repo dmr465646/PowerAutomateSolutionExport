@@ -57,11 +57,11 @@ jobs:
 
       - name: Commit and push unpacked solution
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
           git add solutions/
           git diff --cached --quiet || git commit -m "Unpacked solution ${{ github.event.inputs.solution-name }}"
-          git push origin main
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
