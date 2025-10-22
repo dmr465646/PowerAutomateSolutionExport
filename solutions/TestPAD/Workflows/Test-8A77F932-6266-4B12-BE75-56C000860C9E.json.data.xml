@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{8a77f932-6266-4b12-be75-56c000860c9e}" Name="Test" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <JsonFileName>/Workflows/Test-8A77F932-6266-4B12-BE75-56C000860C9E.json</JsonFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>6</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <UIFlowType>2</UIFlowType>
+  <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+  <ModernFlowType>0</ModernFlowType>
+  <Metadata>{"clientversion":"2.60.154.25253","isvalid":true,"$schema":"https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#","schemaVersion":"ROBIN_20211012","containsActiveConnections":false,"containsGptPredictActions":false,"containsActiveCopilotActions":false,"containsActiveWorkQueuesActions":false,"containsActiveLogMessageActions":false,"containsActiveCredentialsActions":false,"multipleRequestsState":0,"scriptType":0,"disableScreenshotCaptureOnError":false,"missingUiElementRepairType":null,"flowTimeout":null,"screenResolution":null,"flowLogsVerbosity":null}</Metadata>
+  <Inputs>{"schema":null}</Inputs>
+  <Outputs>{"schema":null}</Outputs>
+  <Dependencies>{"childFlows":[],"workQueues":[],"environmentVariables":[],"requiredBinaries":["bc87215d-6428-4cb4-8f29-ee0f7f2a9f05","8500e6f0-f106-4873-9db5-220b3ca79c4c","7a3dfe11-1417-4965-b991-744e70580e7e","ca1a6842-d6b6-43dd-9577-866c08c56207"]}</Dependencies>
+  <ConnectionReferences>[]</ConnectionReferences>
+  <Definition>"@@ConnectionString: ''\r\n@@Type: 'Local'\r\n@@DesktopType: 'local'\r\n@@DisplayName: 'Local computer'\r\nIMPORT 'controlRepo.appmask' AS appmask\r\nIMPORT 'imageRepo.imgrepo' AS imgrepo\r\n@SENSITIVE: []\r\nDisplay.ShowMessageDialog.ShowMessage Title: $'''Test''' Message: $'''Test''' Icon: Display.Icon.None Buttons: Display.Buttons.OK DefaultButton: Display.DefaultButton.Button1 IsTopMost: False ButtonPressed=&gt; ButtonPressed\r\n"</Definition>
+  <SchemaVersion>2022.07</SchemaVersion>
+  <Claims>[]</Claims>
+  <DesktopFlowModules>[]</DesktopFlowModules>
+  <Credentials>[]</Credentials>
+  <PrimaryEntity>none</PrimaryEntity>
+  <LocalizedNames>
+    <LocalizedName languagecode="1033" description="Test" />
+  </LocalizedNames>
+</Workflow>

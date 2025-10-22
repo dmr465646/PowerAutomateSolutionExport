@@ -1,0 +1,14 @@
+<desktopflowbinary desktopflowbinaryid="bc87215d-6428-4cb4-8f29-ee0f7f2a9f05">
+  <data mimetype="application/json">ControlRepository_bc87215d-6428-4cb4-8f29-ee0f7f2a9f05.json</data>
+  <iscustomizable>1</iscustomizable>
+  <metadata>{}</metadata>
+  <mimetype>application/json</mimetype>
+  <name>Desktop flow ui elements</name>
+  <process>
+    <workflowid>8a77f932-6266-4b12-be75-56c000860c9e</workflowid>
+  </process>
+  <reference>controlRepo.appmask</reference>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>ControlRepository</type>
+</desktopflowbinary>
